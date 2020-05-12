@@ -5,7 +5,6 @@ from django.views.generic import ListView,DetailView
 from .models import Product, Category, ProductImage
 from datetime import timedelta
 from django.http import JsonResponse
-from checkout.form import AddToCheckout
 from checkout.models import Checkout, CheckoutLine
 from product.models import Product
 
@@ -13,11 +12,6 @@ from product.models import Product
 class DetailProduct(DetailView):
     model = Product
     template_name = 'product/detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DetailProduct, self).get_context_data(**kwargs)
-        context['checkout_form'] = AddToCheckout()
-        return context
 
 
 class ListProduct(ListView):

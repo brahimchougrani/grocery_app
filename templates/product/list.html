@@ -3,9 +3,7 @@
 {% block content %}
     {% for object in object_list %}
         <a href="{% url 'products:detail_product' slug=object.slug %}">
-            <div>
-                <img src="{{ object.get_first_image.image.url}}" alt="">
-            </div>
+            <img src="{{ object.get_thumbnail.image.url }}" alt="{{  object.get_thumbnail.alt }}">
             <h5>{{ object.name }} </h5>
             <p>{{ object.sku }} | {{ object.price }}$ </p>
         </a>

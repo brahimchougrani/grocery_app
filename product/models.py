@@ -34,6 +34,9 @@ class Brand(models.Model):
     def __str__(self):
         return self.name
 
+# product = 2
+# get all images of this product
+# product.productimage_set.all()
 class Product(models.Model):
     name = models.CharField(max_length=225)
     slug = models.SlugField(max_length=225)
@@ -51,13 +54,10 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('dashboard:product_dashboard:product_list')
 
-    def in_stock(self,quanity):
-        return (quanity <= self.stock)
-
-    def get_first_image(self):
+    def get_thumbnail(self):
         return self.productimage_set.first()
 
 class ProductImage(models.Model):
     image = models.ImageField()
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    alt = models.CharField(max_length=225,blank=True,null=True)
+    alt = models.CharField(max_length=225)

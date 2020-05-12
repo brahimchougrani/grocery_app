@@ -1,0 +1,28 @@
+{% extends 'dashboard/base.html' %}
+{% block static %}
+<link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+{% endblock %}
+{% block dashcontent %}
+    <form method="post" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data" action="{% url 'dashboard:product_dashboard:create_image' pk=product_id %}">
+        {% csrf_token %}
+        <div class="fallback">
+           {{ form }}
+        </div>
+    </form>
+    {% for object in object_list %}
+        <img src="{{ object.image.url }}" alt="{{ object.alt }}">
+    {% endfor %}
+
+{% endblock %}
+{% block js %}
+<script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+ <script>
+    Dropzone.autoDiscover = false;
+    $(function() {
+      var myDropzone = new Dropzone(".dropzone",{
+            paramName: "image", // The name that will be used to transfer the file
+      });
+
+})
+ </script>
+{% endblock %}
